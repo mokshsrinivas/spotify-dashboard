@@ -6,6 +6,7 @@ const TopAlbums = () => {
   const [topSongs, setTopSongs] = useState([]);
   const [albumsWithScores, setAlbumsWithScores] = useState([]);
   const [playingAlbumId, setPlayingAlbumId] = useState(null);
+  const [loading, setLoading] = useState(true); // Add loading state
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -59,8 +60,10 @@ const TopAlbums = () => {
   }, [token]);
 
   useEffect(() => {
-    if (token && topSongs.length > 0) {
-      const fetchAlbums = async () => {
+    const fetchAlbums = async () => {
+      if (token && topSongs.length > 0) {
+        setLoading(true); // Set loading to true before fetching
+
         const albumScores = new Map();
 
         // Fetch albums for each top song
@@ -100,10 +103,11 @@ const TopAlbums = () => {
           .slice(0, 20); // Limit to top 20 albums
 
         setAlbumsWithScores(sortedAlbums);
-      };
+        setLoading(false); // Set loading to false after fetching
+      }
+    };
 
-      fetchAlbums();
-    }
+    fetchAlbums();
   }, [token, topSongs]);
 
   const fetchPreviewForAlbum = async (albumId) => {
@@ -151,22 +155,26 @@ const TopAlbums = () => {
   return (
     <div className="top-albums">
       <h1>Your Top Albums</h1>
-      <div className="item-grid">
-        {albumsWithScores.map(({ album }) => (
-          <div key={album.id} className="item">
-            <img src={album.images[0]?.url} alt={album.name} />
-            <div>
-              <h3>{album.name}</h3>
-              <p>{album.artists.map(artist => artist.name).join(', ')}</p>
-              <button
-                onClick={() => handlePlayPause(album.id)}
-              >
-                {playingAlbumId === album.id ? 'Pause Preview' : 'Play Preview'}
-              </button>
+      {loading ? (
+        <div>Loading...</div> // Show loading message while fetching
+      ) : (
+        <div className="item-grid">
+          {albumsWithScores.map(({ album }) => (
+            <div key={album.id} className="item">
+              <img src={album.images[0]?.url} alt={album.name} />
+              <div>
+                <h3>{album.name}</h3>
+                <p>{album.artists.map(artist => artist.name).join(', ')}</p>
+                <button
+                  onClick={() => handlePlayPause(album.id)}
+                >
+                  {playingAlbumId === album.id ? 'Pause Preview' : 'Play Preview'}
+                </button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      )}
       <audio ref={audioRef} />
     </div>
   );
