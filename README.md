@@ -1,6 +1,8 @@
 # The Spotify Dashboard
 
-Hi, this is my Final Project for CS396 which utilizes a Spotify API
+Hi, this is my Final Project for CS396 which utilizes a Spotify API.
+
+Here is the website: https://spotify-dashboard-jet.vercel.app
 
 ## Available Featers
 

@@ -6,6 +6,8 @@ import TopSongs from './TopSongs';
 import TopArtists from './TopArtists';
 import TopAlbums from './TopAlbums';
 import Search from './Search';
+import PlaylistSearch from './PlaylistSearch';
+
 import './App.css';
 
 const App = () => (
@@ -17,6 +19,8 @@ const App = () => (
         <Link to="/top-artists" className="navbar-link">Top Artists</Link>
         <Link to="/top-albums" className="navbar-link">Top Albums</Link>
         <Link to="/search" className="navbar-link">Search Songs</Link>
+        <Link to="/playlist-search" className="navbar-link">Search Playlists</Link>
+
       </nav>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -25,6 +29,7 @@ const App = () => (
         <Route path="/top-artists" element={<TopArtists />} />
         <Route path="/top-albums" element={<TopAlbums />} />
         <Route path="/search" element={<Search />} />
+        <Route path="/playlist-search" element={<PlaylistSearch />} />
       </Routes>
     </div>
   </Router>
