@@ -21,7 +21,7 @@ const Search = () => {
         params: {
           q: query,
           type: 'track',
-          limit: 50 // Request 50 results
+          limit: 100 
         }
       });
 
