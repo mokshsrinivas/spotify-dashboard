@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import './App.css'; // Ensure this is imported for the styles
+import '../styles/App.css';
 
 const PlaylistSearch = () => {
   const [token, setToken] = useState(localStorage.getItem('spotify_token'));
@@ -114,29 +114,43 @@ const PlaylistSearch = () => {
   };
 
   return (
-    <div className="search">
-      <h1>Search for Playlists</h1>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Search for a playlist"
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+      <div className="text-center my-8">
+        <h1 className="text-3xl font-bold mb-4">Search for Playlists</h1>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="Search for a playlist"
+          className="p-2 text-lg rounded-md border border-input text-gray-900" /* Set text color to dark gray */
+        />
+        <button
+          onClick={handleSearch}
+          className="ml-2 px-4 py-2 bg-[#1DB954] text-white rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+        >
+          Search
+        </button>
+      </div>
 
       {results.length > 0 && (
-        <div className="item-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
           {results.map((playlist) => (
-            <div className="item" key={playlist.id}>
-              <img src={playlist.images[0]?.url} alt={playlist.name} />
-              <h3>{playlist.name}</h3>
-              <p>{playlist.description || 'No description available'}</p>
-              <div className="button-group">
-                <button onClick={() => handlePlayPause(playlist.id)}>
+            <div className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between" key={playlist.id}>
+              <img src={playlist.images[0]?.url} alt={playlist.name} className="rounded-lg w-full h-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">{playlist.name}</h3>
+              <p className="text-sm text-gray-400">{playlist.description || 'No description available'}</p>
+              <div className="mt-4 flex gap-2 justify-center">
+                <button
+                  onClick={() => handlePlayPause(playlist.id)}
+                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+                >
                   {playingPlaylistId === playlist.id ? 'Pause Preview' : 'Play Preview'}
                 </button>
-                <button onClick={() => followPlaylist(playlist.id)}>
+                <button
+                  onClick={() => followPlaylist(playlist.id)}
+                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+                >
                   Add to Library
                 </button>
               </div>

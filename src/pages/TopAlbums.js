@@ -1,5 +1,7 @@
+// src/TopAlbums.js
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import '../styles/App.css';
 
 const TopAlbums = () => {
   const [token, setToken] = useState(null);
@@ -153,28 +155,29 @@ const TopAlbums = () => {
   }
 
   return (
-    <div className="top-albums">
-      <h1>Your Top Albums</h1>
-      {loading ? (
-        <div>Loading...</div> // Show loading message while fetching
-      ) : (
-        <div className="item-grid">
-          {albumsWithScores.map(({ album }) => (
-            <div key={album.id} className="item">
-              <img src={album.images[0]?.url} alt={album.name} />
-              <div>
-                <h3>{album.name}</h3>
-                <p>{album.artists.map(artist => artist.name).join(', ')}</p>
+    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+      <div className="text-center my-8">
+        <h1 className="text-3xl font-bold mb-4">Your Top Albums</h1>
+        {loading ? (
+          <div className="text-center text-xl">Loading...</div> // Show loading message while fetching
+        ) : (
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+            {albumsWithScores.map(({ album }) => (
+              <div key={album.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
+                <img src={album.images[0]?.url} alt={album.name} className="rounded-lg w-full h-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">{album.name}</h3>
+                <p className="text-sm text-gray-400">{album.artists.map(artist => artist.name).join(', ')}</p>
                 <button
                   onClick={() => handlePlayPause(album.id)}
+                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400 mt-4"
                 >
                   {playingAlbumId === album.id ? 'Pause Preview' : 'Play Preview'}
                 </button>
               </div>
-            </div>
-          ))}
-        </div>
-      )}
+            ))}
+          </div>
+        )}
+      </div>
       <audio ref={audioRef} />
     </div>
   );

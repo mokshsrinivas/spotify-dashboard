@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: 0 0% 100%;
+  --foreground: 240 10% 3.9%;
+  --card: 0 0% 100%;
+  --card-foreground: 240 10% 3.9%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 240 10% 3.9%;
+  --primary: 0 0% 0%; /* Black */
+  --primary-foreground: 255 255% 255%; /* White */
+  --secondary: 240 4.8% 95.9%;
+  --secondary-foreground: 240 5.9% 10%;
+  --muted: 240 4.8% 95.9%;
+  --muted-foreground: 240 3.8% 45%;
+  --accent: 240 4.8% 95.9%;
+  --accent-foreground: 240 5.9% 10%;
+  --destructive: 0 72% 51%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 240 5.9% 90%;
+  --input: 240 5.9% 90%;
+  --ring: 240 5.9% 10%;
+  --radius: 0.5rem;
+}
+
+/* Apply utility classes globally */
+* {
+  @apply m-0 p-0 box-border;
+}
+
+body {
+  @apply bg-background text-foreground font-body;
+}
+
+.app {
+  @apply flex flex-col min-h-screen bg-background text-foreground;
+}
+
+.navbar {
+  @apply bg-[#1DB954] text-primary-foreground p-4 flex justify-center;
+}
+
+.navbar-link {
+  @apply text-white no-underline font-bold transition duration-300;
+  margin-right: 15px;
+}
+
+.navbar-link:hover {
+  @apply underline transform -translate-y-1 text-gray-200;
+}
+
+.login, .top-songs, .top-artists, .top-albums {
+  @apply text-center my-5;
+}
+
+.login-button {
+  @apply bg-[#1DB954] text-primary-foreground px-6 py-3 rounded-md font-bold no-underline transition-colors duration-300 hover:bg-green-400;
+}
+
+ul {
+  @apply list-none p-0 m-0;
+}
+
+.search, .playlist-search {
+  @apply text-center my-5;
+}
+
+.search input, .playlist-search input {
+  @apply p-2 text-lg rounded-md border border-input;
+}
+
+.search button, .playlist-search button {
+  @apply px-6 py-3 ml-4 bg-[#1DB954] text-primary-foreground border-none rounded-md cursor-pointer transition-colors duration-300;
+}
+
+.search button:hover, .playlist-search button:hover {
+  @apply bg-green-400;
+}
+
+.search ul, .playlist-search ul {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5;
+}
+
+.search li, .playlist-search li {
+  @apply flex items-center bg-card p-4 rounded-md;
+}
+
+.search img, .playlist-search img {
+  @apply rounded-md mr-3;
+}
+
+.item-grid {
+  @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5;
+}
+
+.item {
+  @apply bg-card p-4 rounded-lg text-center flex flex-col justify-between;
+}
+
+.item img {
+  @apply rounded-lg w-full h-auto;
+}
+
+.item h3 {
+  @apply text-lg font-semibold mt-3 mb-2;
+}
+
+.item p {
+  @apply text-sm text-muted-foreground;
+}
+
+.item button {
+  @apply bg-[#1DB954] text-primary-foreground border-none rounded-md px-5 py-2 mt-3 cursor-pointer transition-colors duration-300;
+}
+
+.item button:hover {
+  @apply bg-green-400;
+}
+
+.button-group {
+  @apply flex gap-3 justify-center mt-3;
+}

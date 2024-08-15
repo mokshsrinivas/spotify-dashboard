@@ -1,9 +1,10 @@
+// src/Search.js
 import React, { useState, useRef } from 'react';
 import axios from 'axios';
-import './App.css'; // Import the CSS file
+import '../styles/App.css';
 
 const Search = () => {
-  const token = useState(localStorage.getItem('spotify_token'));
+  const token = localStorage.getItem('spotify_token'); // Get token from localStorage
   const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [playingTrackId, setPlayingTrackId] = useState(null);
@@ -84,32 +85,44 @@ const Search = () => {
   };
 
   return (
-    <div className="search">
-      <h1>Search for a Song</h1>
-      <input
-        type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="Search for a song"
-      />
-      <button onClick={handleSearch}>Search</button>
+    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+      <div className="text-center my-8">
+        <h1 className="text-3xl font-bold mb-4">Search for a Song</h1>
+        <div className="flex justify-center mb-4">
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Search for a song"
+            className="p-2 text-lg rounded-md border border-input text-gray-900"
+          />
+          <button
+            onClick={handleSearch}
+            className="ml-2 px-4 py-2 bg-[#1DB954] text-white rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+          >
+            Search
+          </button>
+        </div>
+      </div>
 
       {results.length > 0 && (
-        <div className="item-grid">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
           {results.map((track) => (
-            <div className="item" key={track.id}>
-              <img src={track.album.images[0]?.url} alt={track.name} />
-              <h3>{track.name}</h3>
-              <p>{track.artists.map(artist => artist.name).join(', ')}</p>
-              <div className="button-group">
+            <div key={track.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
+              <img src={track.album.images[0]?.url} alt={track.name} className="rounded-lg w-full h-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">{track.name}</h3>
+              <p className="text-sm text-gray-400">{track.artists.map(artist => artist.name).join(', ')}</p>
+              <div className="mt-4 flex gap-2 justify-center">
                 <button
                   onClick={() => handlePlayPause(track.id)}
+                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
                 >
                   {playingTrackId === track.id ? 'Pause Preview' : 'Play Preview'}
                 </button>
                 <button
                   onClick={() => addToLikedSongs(track.id)}
+                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
                 >
                   Add to Liked Songs
                 </button>

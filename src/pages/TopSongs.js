@@ -1,6 +1,7 @@
 // src/TopSongs.js
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import '../styles/App.css';
 
 const TopSongs = () => {
   const [token, setToken] = useState(null);
@@ -65,23 +66,24 @@ const TopSongs = () => {
   }
 
   return (
-    <div className="top-songs">
-      <h1>Your Top Songs</h1>
-      <div className="item-grid">
-        {topTracks.map(track => (
-          <div key={track.id} className="item">
-            <img src={track.album.images[0]?.url} alt={track.name} />
-            <div>
-              <h3>{track.name}</h3>
-              <p>{track.artists.map(artist => artist.name).join(', ')}</p>
+    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
+      <div className="text-center my-8">
+        <h1 className="text-3xl font-bold mb-4">Your Top Songs</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+          {topTracks.map(track => (
+            <div key={track.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
+              <img src={track.album.images[0]?.url} alt={track.name} className="rounded-lg w-full h-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">{track.name}</h3>
+              <p className="text-sm text-gray-400">{track.artists.map(artist => artist.name).join(', ')}</p>
               <button
                 onClick={() => handlePlayPause(track.id, track.preview_url)}
+                className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400 mt-4"
               >
                 {playingTrackId === track.id ? 'Pause Preview' : 'Play Preview'}
               </button>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <audio ref={audioRef} />
     </div>

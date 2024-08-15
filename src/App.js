@@ -1,14 +1,13 @@
 // src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
-import Login from './Login';
-import TopSongs from './TopSongs';
-import TopArtists from './TopArtists';
-import TopAlbums from './TopAlbums';
-import Search from './Search';
-import PlaylistSearch from './PlaylistSearch';
-
-import './App.css';
+import Login from './pages/Login';
+import TopSongs from './pages/TopSongs';
+import TopArtists from './pages/TopArtists';
+import TopAlbums from './pages/TopAlbums';
+import Search from './pages/Search';
+import PlaylistSearch from './pages/PlaylistSearch';
+import './styles/App.css';
 
 const App = () => (
   <Router>
@@ -20,8 +19,8 @@ const App = () => (
         <Link to="/top-albums" className="navbar-link">Top Albums</Link>
         <Link to="/search" className="navbar-link">Search Songs</Link>
         <Link to="/playlist-search" className="navbar-link">Search Playlists</Link>
-
       </nav>
+      
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/callback" element={<TopSongs />} />
