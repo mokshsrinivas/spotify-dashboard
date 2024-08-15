@@ -27,7 +27,7 @@ const PlaylistSearch = () => {
         params: {
           q: query,
           type: 'playlist',
-          limit: 100
+          limit: 50
         }
       });
 
