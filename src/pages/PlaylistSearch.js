@@ -113,6 +113,13 @@ const PlaylistSearch = () => {
     }
   };
 
+  // Function to strip HTML tags from the description
+  const stripHtmlTags = (htmlString) => {
+    const div = document.createElement('div');
+    div.innerHTML = htmlString;
+    return div.textContent || div.innerText || '';
+  };
+
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <div className="text-center my-8">
@@ -139,7 +146,9 @@ const PlaylistSearch = () => {
             <div className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between" key={playlist.id}>
               <img src={playlist.images[0]?.url} alt={playlist.name} className="rounded-lg w-full h-auto mb-4" />
               <h3 className="text-lg font-semibold mb-2">{playlist.name}</h3>
-              <p className="text-sm text-gray-400">{playlist.description || 'No description available'}</p>
+              <p className="text-sm text-gray-400">
+                {stripHtmlTags(playlist.description) || 'No description available'}
+              </p>
               <div className="mt-4 flex gap-2 justify-center">
                 <button
                   onClick={() => handlePlayPause(playlist.id)}
