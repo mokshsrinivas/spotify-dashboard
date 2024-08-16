@@ -130,7 +130,7 @@ const PlaylistSearch = () => {
           onChange={(e) => setQuery(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder="Search for a playlist"
-          className="p-2 text-lg rounded-md border border-input text-gray-900" /* Set text color to dark gray */
+          className="p-2 text-lg rounded-md border border-input text-gray-900" 
         />
         <button
           onClick={handleSearch}

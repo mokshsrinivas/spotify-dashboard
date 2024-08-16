@@ -88,7 +88,6 @@ const Search = () => {
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <div className="text-center my-8">
         <h1 className="text-3xl font-bold mb-4">Search for a Song</h1>
-        <div className="flex justify-center mb-4">
           <input
             type="text"
             value={query}
@@ -103,7 +102,6 @@ const Search = () => {
           >
             Search
           </button>
-        </div>
       </div>
 
       {results.length > 0 && (
