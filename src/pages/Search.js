@@ -132,7 +132,6 @@ const Search = () => {
               <h3 className="text-lg font-semibold mb-2">{track.name}</h3>
               <p className="text-sm text-gray-400">{track.artists.map(artist => artist.name).join(', ')}</p>
 
-              {/* Add metrics (acousticness, danceability, etc.) */}
               {trackFeatures[track.id] && (
                 <div className="space-y-2 mb-4">
                   {['acousticness', 'danceability', 'energy', 'instrumentalness', 'valence'].map(metric => {
