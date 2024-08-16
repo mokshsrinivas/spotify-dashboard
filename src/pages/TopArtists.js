@@ -81,14 +81,14 @@ const TopArtists = () => {
     }
   };
 
-  if (!token) {
-    return <div>Redirecting...</div>;
-  }
 
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <div className="text-center my-8">
         <h1 className="text-3xl font-bold mb-4">Your Top Artists</h1>
+        {!token ? (
+          <p className="text-red-500">Expired or no token. Please log in.</p>
+        ) : (
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
           {topArtists.map(artist => (
             <div key={artist.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
@@ -102,7 +102,7 @@ const TopArtists = () => {
               </button>
             </div>
           ))}
-        </div>
+        </div>)}
       </div>
       <audio ref={audioRef} />
     </div>

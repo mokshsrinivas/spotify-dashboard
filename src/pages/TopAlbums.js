@@ -150,16 +150,16 @@ const TopAlbums = () => {
     }
   };
 
-  if (!token) {
-    return <div>Redirecting...</div>;
-  }
-
   return (
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <div className="text-center my-8">
         <h1 className="text-3xl font-bold mb-4">Your Top Albums</h1>
+        {!token ? (
+          <p className="text-red-500">Expired or no token. Please log in.</p>
+        ) : (
+          <div>
         {loading ? (
-          <div className="text-center text-xl">Loading...</div> // Show loading message while fetching
+          <div className="text-center text-xl">Loading...</div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
             {albumsWithScores.map(({ album }) => (
@@ -177,6 +177,9 @@ const TopAlbums = () => {
             ))}
           </div>
         )}
+        </div>
+        )}
+        
       </div>
       <audio ref={audioRef} />
     </div>

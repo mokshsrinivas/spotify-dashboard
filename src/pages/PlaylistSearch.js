@@ -34,6 +34,7 @@ const PlaylistSearch = () => {
       setResults(response.data.playlists.items);
     } catch (error) {
       console.error('Error searching for playlists:', error);
+
     }
   };
 
@@ -124,20 +125,26 @@ const PlaylistSearch = () => {
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <div className="text-center my-8">
         <h1 className="text-3xl font-bold mb-4">Search for Playlists</h1>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          onKeyDown={handleKeyDown}
-          placeholder="Search for a playlist"
-          className="p-2 text-lg rounded-md border border-input text-gray-900" 
-        />
-        <button
-          onClick={handleSearch}
-          className="ml-2 px-4 py-2 bg-[#1DB954] text-white rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
-        >
-          Search
-        </button>
+        {!token ? (
+          <p className="text-red-500">Expired or no token. Please log in.</p>
+        ) : (
+          <div>
+          <input
+            type="text"
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={handleKeyDown}
+            placeholder="Search for a playlist"
+            className="p-2 text-lg rounded-md border border-input text-gray-900" 
+          />
+          <button
+            onClick={handleSearch}
+            className="ml-2 px-4 py-2 bg-[#1DB954] text-white rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+          >
+            Search
+          </button>
+          </div>
+        )}
       </div>
 
       {results.length > 0 && (

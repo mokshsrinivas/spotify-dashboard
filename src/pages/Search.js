@@ -28,6 +28,7 @@ const Search = () => {
       setResults(response.data.tracks.items);
     } catch (error) {
       console.error('Error searching for tracks:', error);
+      alert("Invalid token. Log in first");
     }
   };
 
@@ -80,7 +81,6 @@ const Search = () => {
       alert('Song added to your Liked Songs!');
     } catch (error) {
       console.error('Error adding song to Liked Songs:', error);
-      alert('Failed to add song to Liked Songs.');
     }
   };
 
@@ -88,6 +88,10 @@ const Search = () => {
     <div className="flex flex-col min-h-screen bg-gray-900 text-white">
       <div className="text-center my-8">
         <h1 className="text-3xl font-bold mb-4">Search for a Song</h1>
+        {!token ? (
+          <p className="text-red-500">Expired or no token. Please log in.</p>
+        ) : (
+          <div>
           <input
             type="text"
             value={query}
@@ -102,6 +106,9 @@ const Search = () => {
           >
             Search
           </button>
+          </div>
+        )}
+        
       </div>
 
       {results.length > 0 && (
