@@ -157,28 +157,29 @@ const TopAlbums = () => {
           <p className="text-red-500">Expired or no token. Please log in.</p>
         ) : (
           <div>
-        {loading ? (
-          <div className="text-center text-xl">Loading...</div>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-            {albumsWithScores.map(({ album }) => (
-              <div key={album.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
-                <img src={album.images[0]?.url} alt={album.name} className="rounded-lg w-full h-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">{album.name}</h3>
-                <p className="text-sm text-gray-400">{album.artists.map(artist => artist.name).join(', ')}</p>
-                <button
-                  onClick={() => handlePlayPause(album.id)}
-                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400 mt-4"
-                >
-                  {playingAlbumId === album.id ? 'Pause Preview' : 'Play Preview'}
-                </button>
+            {loading ? (
+              <div className="text-center text-xl">Loading...</div>
+            ) : (
+              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+                {albumsWithScores.map(({ album }, index) => (
+                  <div key={album.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
+                    <img src={album.images[0]?.url} alt={album.name} className="rounded-lg w-full h-auto mb-4" />
+                    <h3 className="text-lg font-semibold mb-2">
+                      {index + 1}. {album.name} {/* Display the rank number here */}
+                    </h3>
+                    <p className="text-sm text-gray-400">{album.artists.map(artist => artist.name).join(', ')}</p>
+                    <button
+                      onClick={() => handlePlayPause(album.id)}
+                      className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400 mt-4"
+                    >
+                      {playingAlbumId === album.id ? 'Pause Preview' : 'Play Preview'}
+                    </button>
+                  </div>
+                ))}
               </div>
-            ))}
+            )}
           </div>
         )}
-        </div>
-        )}
-        
       </div>
       <audio ref={audioRef} />
     </div>

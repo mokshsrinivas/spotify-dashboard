@@ -86,10 +86,12 @@ const TopSongs = () => {
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
             {topTracks.length > 0 ? (
-              topTracks.map(track => (
+              topTracks.map((track, index) => (
                 <div key={track.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
                   <img src={track.album.images[0]?.url} alt={track.name} className="rounded-lg w-full h-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">{track.name}</h3>
+                  <h3 className="text-lg font-semibold mb-2">
+                    {index + 1}. {track.name} {/* Display the rank number here */}
+                  </h3>
                   <p className="text-sm text-gray-400 mb-4">{track.artists.map(artist => artist.name).join(', ')}</p>
 
                   {/* Add metrics (acousticness, danceability, etc.) */}
