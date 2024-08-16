@@ -31,7 +31,7 @@ const TopArtists = () => {
 
   useEffect(() => {
     if (token) {
-      axios.get('https://api.spotify.com/v1/me/top/artists', {
+      axios.get('https://api.spotify.com/v1/me/top/artists?limit=40', {
         headers: {
           Authorization: `Bearer ${token}`
         }
