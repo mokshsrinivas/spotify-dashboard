@@ -99,7 +99,6 @@ const TopAlbums = () => {
           }
         }
 
-        // Convert map to array, sort by score, and slice to top 20
         const sortedAlbums = Array.from(albumScores.values())
           .sort((a, b) => b.score - a.score)
           .slice(0, 20); // Limit to top 20 albums
