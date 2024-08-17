@@ -62,7 +62,7 @@ body {
 
 .dropdown-content {
   @apply absolute bg-white text-[#1DB954] rounded-lg shadow-lg hidden;
-  min-width: 300px;
+  min-width: 230px;
   max-width: 100vw; 
   max-height: 200px; 
   overflow-y: auto;
@@ -166,27 +166,35 @@ ul {
   }
 
   .dropdown-content {
-    @apply absolute mx-auto bg-white text-[#1DB954] rounded-lg shadow-lg hidden;
-    min-width: 300px; /* Normal dropdown size */
-    max-width: 100vw;
-    max-height: 200px;
+    @apply absolute bg-white text-[#1DB954] rounded-lg shadow-lg hidden;
+    min-width: 200px;
+    max-width: 100vw; 
+    max-height: 200px; 
     overflow-y: auto;
     z-index: 10;
-    top: 100%; /* Position the dropdown below the button */
-    left: 50%;
-    transform: translateX(-50%); /* Center the dropdown with respect to the button */
   }
 }
 
 
 @media (max-width: 640px) {
-  .dropdown-content {
-    @apply fixed left-0 right-0 mx-auto w-full; /* Take full width and center the dropdown */
-    top: 56px; /* Position the dropdown below the navbar */
-    @apply mt-2; /* Add some margin from the navbar */
-    @apply px-4;
-    z-index: 10;
-  }
+  /* Styles for the navbar */
+.navbar {
+  background-color: #1DB954;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative; /* Make the navbar fixed */
+  width: 100%;
+  top: 0;
+  z-index: 100;
+}
+
+
+.dropdown {
+  @apply right-0;
+}
+
+
 
   
 }
