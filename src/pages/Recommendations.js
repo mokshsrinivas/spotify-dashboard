@@ -15,7 +15,7 @@ const Recommendations = () => {
 
   const handleSearch = useCallback(async () => {
     if (!query) return;
-
+  
     try {
       const response = await axios.get('https://api.spotify.com/v1/search', {
         headers: {
@@ -27,26 +27,31 @@ const Recommendations = () => {
           limit: 10
         }
       });
-
+  
       setSearchResults(response.data.tracks.items);
       const trackIds = response.data.tracks.items.map(track => track.id).join(',');
-
+  
       const featuresResponse = await axios.get(`https://api.spotify.com/v1/audio-features?ids=${trackIds}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
       });
-
-      const features = {};
+  
+      const newFeatures = {};
       featuresResponse.data.audio_features.forEach(feature => {
-        features[feature.id] = feature;
+        newFeatures[feature.id] = feature;
       });
-      setTrackFeatures(features);
+  
+      setTrackFeatures(prevFeatures => ({
+        ...prevFeatures,
+        ...newFeatures
+      }));
     } catch (error) {
       console.error('Error searching for tracks:', error);
       alert("Invalid token. Log in first");
     }
   }, [query, token]);
+  
 
   const fetchRecommendations = useCallback(async () => {
     if (selectedTracks.length === 0) return;

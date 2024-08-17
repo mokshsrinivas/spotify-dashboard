@@ -25,7 +25,6 @@
   --radius: 0.5rem;
 }
 
-/* Apply utility classes globally */
 * {
   @apply m-0 p-0 box-border;
 }
@@ -39,25 +38,49 @@ body {
 }
 
 .navbar {
-  @apply bg-[#1DB954] text-primary-foreground p-4 flex justify-center;
-  @apply flex-wrap;
+  @apply bg-[#1DB954] text-primary-foreground p-4 flex justify-between items-center;
 }
 
-.navbar-link {
-  @apply text-white no-underline font-bold transition duration-300;
-  margin-right: 15px;
-}
-
-.navbar-link:hover {
-  @apply underline transform -translate-y-1 text-gray-200;
-}
-
-.login, .top-songs, .top-artists, .top-albums {
-  @apply text-center my-5;
+.navbar-center {
+  @apply flex-grow flex justify-center items-center space-x-6;
 }
 
 .login-button {
-  @apply bg-[#1DB954] text-primary-foreground px-6 py-3 rounded-md font-bold no-underline transition-colors duration-300 hover:bg-green-400;
+  @apply text-white font-bold no-underline transition-colors duration-300 hover:bg-green-400 px-4 py-2 rounded-md;
+}
+
+.dropdown {
+  @apply relative;
+}
+
+.navbar-link {
+  @apply text-white font-bold no-underline cursor-pointer transition-colors duration-300 hover:bg-green-400 px-4 py-2 rounded-md;
+}
+
+.dropdown-content {
+  @apply absolute left-0 mt-2 bg-white text-[#1DB954] rounded-lg shadow-lg hidden;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.dropdown-content .dropdown-item {
+  @apply block px-4 py-2 text-gray-900 text-left hover:bg-gray-200 no-underline;
+}
+
+.dropdown:hover .dropdown-content {
+  @apply block;
+}
+
+.dropdown-item:hover {
+  @apply text-gray-700;
+}
+
+.dropdown-content.show {
+  @apply block;
+}
+
+.navbar-left {
+  @apply flex items-center;
 }
 
 ul {
@@ -70,7 +93,6 @@ ul {
 
 .search input, .playlist-search input {
   @apply p-2 text-lg rounded-md border border-input;
-  @apply flex-wrap;
 }
 
 .search button, .playlist-search button {
