@@ -86,6 +86,11 @@ body {
   right: 0; /* Position dropdown to the left of the button */
 }
 
+.dropdown-left-content {
+  right: 0; /* Position dropdown to the left of the button */
+}
+
+
 .dropdown-content.right {
   right: 0; /* Position dropdown to the right of the button */
 }
@@ -163,5 +168,15 @@ ul {
   .search button, .playlist-search button {
     @apply mt-5;
   }
+}
+
+@media (max-width: 640px) {
+  .dropdown-content {
+    center: 0;
+  }
+  .dropdown-left-content {
+    right: 0;
+  }
+  
 }
 
