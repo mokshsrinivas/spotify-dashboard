@@ -12,8 +12,9 @@ import './styles/App.css';
 const App = () => {
   const [isTopItemsDropdownOpen, setIsTopItemsDropdownOpen] = useState(false);
   const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
-  const topItemsDropdownRef = useRef(null);
-  const searchDropdownRef = useRef(null);
+
+  const topItemsRef = useRef(null);
+  const searchRef = useRef(null);
 
   const toggleTopItemsDropdown = () => {
     setIsTopItemsDropdownOpen(!isTopItemsDropdownOpen);
@@ -32,26 +33,17 @@ const App = () => {
 
   useEffect(() => {
     const handleClickOutside = (event) => {
-      if (
-        topItemsDropdownRef.current && 
-        !topItemsDropdownRef.current.contains(event.target) &&
-        searchDropdownRef.current &&
-        !searchDropdownRef.current.contains(event.target)
-      ) {
-        closeDropdowns();
+      if (topItemsRef.current && !topItemsRef.current.contains(event.target)) {
+        setIsTopItemsDropdownOpen(false);
+      }
+      if (searchRef.current && !searchRef.current.contains(event.target)) {
+        setIsSearchDropdownOpen(false);
       }
     };
 
-    if (isTopItemsDropdownOpen || isSearchDropdownOpen) {
-      document.addEventListener('click', handleClickOutside);
-    } else {
-      document.removeEventListener('click', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('click', handleClickOutside);
-    };
-  }, [isTopItemsDropdownOpen, isSearchDropdownOpen]);
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
 
   return (
     <Router>
@@ -61,7 +53,7 @@ const App = () => {
             <Link to="/" className="login-button">Login</Link>
           </div>
           <div className="navbar-center">
-            <div className="dropdown" ref={topItemsDropdownRef}>
+            <div className="dropdown" ref={topItemsRef}>
               <button onClick={toggleTopItemsDropdown} className="navbar-link">
                 Your Top Items
               </button>
@@ -73,7 +65,7 @@ const App = () => {
                 </div>
               )}
             </div>
-            <div className="dropdown" ref={searchDropdownRef}>
+            <div className="dropdown" ref={searchRef}>
               <button onClick={toggleSearchDropdown} className="navbar-link">
                 Search
               </button>
