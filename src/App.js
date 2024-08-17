@@ -58,7 +58,7 @@ const App = () => {
                 Your Top Items
               </button>
               {isTopItemsDropdownOpen && (
-                <div className="dropdown-left-content show">
+                <div className="dropdown-content show">
                   <Link to="/top-songs" className="dropdown-item" onClick={closeDropdowns}>Top Songs</Link>
                   <Link to="/top-artists" className="dropdown-item" onClick={closeDropdowns}>Top Artists</Link>
                   <Link to="/top-albums" className="dropdown-item" onClick={closeDropdowns}>Top Albums</Link>
