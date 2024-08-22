@@ -264,19 +264,19 @@ const Recommendations = () => {
 
                     <div className="mt-auto flex gap-2 justify-between">
                       <button
-                        className="bg-[#1DB954] hover:bg-green-400 text-white rounded-md px-4 py-2"
+                        className="bg-[#1DB954] hover:bg-green-400 text-white rounded-md px-3 py-2"
                         onClick={() => handlePlayPause(track.id)}
                       >
                         {playingTrackId === track.id ? 'Pause Preview' : 'Play Preview'}
                       </button>
                       <button
-                        className="bg-[#1DB954] hover:bg-green-400 text-white rounded-md px-4 py-2"
+                        className="bg-[#1DB954] hover:bg-green-400 text-white rounded-md px-3 py-2"
                         onClick={() => addToLikedSongs(track.id)}
                       >
                         Add to Liked Songs
                       </button>
                       <button
-                        className="bg-red-500 hover:bg-red-600 text-white rounded-md px-4 py-2"
+                        className="bg-red-500 hover:bg-red-600 text-white rounded-md px-3 py-2"
                         onClick={() => removeTrackFromList(track.id)}
                       >
                         Remove
