@@ -23,3 +23,6 @@ Based on a combination of your top songs ranking and number of top songs in the 
 ### `Search`
 
 You can search for songs and play previews of each of them. The songs are presented in a better way than the current spotify search tool.
+
+
+This shouldn't need to run locally but if you need to run it locally, in login.js, change redirect uri to http://localhost:3000/callback. run the command npm install react react-dom react-scripts next

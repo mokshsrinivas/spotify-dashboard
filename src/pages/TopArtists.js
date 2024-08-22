@@ -1,6 +1,6 @@
-// src/TopArtists.js
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet'; // Import React Helmet
 import '../styles/App.css';
 
 const TopArtists = () => {
@@ -82,32 +82,45 @@ const TopArtists = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-      <div className="text-center my-8">
-        <h1 className="text-3xl font-bold mb-4">Your Top Artists</h1>
-        {!token ? (
-          <p className="text-red-500">Expired or no token. Please log in.</p>
-        ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-            {topArtists.map((artist, index) => (
-              <div key={artist.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
-                <img src={artist.images[0]?.url} alt={artist.name} className="rounded-lg w-full h-auto mb-4" />
-                <h3 className="text-lg font-semibold mb-2">
-                  {index + 1}. {artist.name} {/* Display the rank number here */}
-                </h3>
-                <button
-                  onClick={() => handlePlayPause(artist.id)}
-                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400 mt-4"
-                >
-                  {playingArtistId === artist.id ? 'Pause Preview' : 'Play Preview'}
-                </button>
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
-      <audio ref={audioRef} />
-    </div>
+    <>
+      <Helmet>
+        <title>Your Top Artists</title>
+        <meta name="description" content="View your top artists on Spotify, play previews, and explore your favorite music." />
+        <meta property="og:title" content="Your Top Artists" />
+        <meta property="og:description" content="Discover and listen to your top artists on Spotify. Enjoy music previews and more." />
+        <meta property="og:url" content="https://spotify-dashboard-jet.vercel.app/top-artists" />
+      </Helmet>
+      <main className="flex flex-col min-h-screen bg-gray-900 text-white">
+        <header className="text-center my-8">
+          <h1 className="text-3xl font-bold mb-4">Your Top Artists</h1>
+          {!token ? (
+            <p className="text-red-500">Expired or no token. Please log in.</p>
+          ) : (
+            <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+              {topArtists.map((artist, index) => (
+                <article key={artist.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
+                  <figure>
+                    <img src={artist.images[0]?.url} alt={artist.name} className="rounded-lg w-full h-auto mb-4" />
+                    <figcaption>
+                      <h2 className="text-lg font-semibold mb-2">
+                        {index + 1}. {artist.name} {/* Display the rank number here */}
+                      </h2>
+                    </figcaption>
+                  </figure>
+                  <button
+                    onClick={() => handlePlayPause(artist.id)}
+                    className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400 mt-4"
+                  >
+                    {playingArtistId === artist.id ? 'Pause Preview' : 'Play Preview'}
+                  </button>
+                </article>
+              ))}
+            </section>
+          )}
+        </header>
+        <audio ref={audioRef} />
+      </main>
+    </>
   );
 };
 

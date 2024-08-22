@@ -12,24 +12,37 @@ import './styles/App.css';
 const App = () => {
   const [isTopItemsDropdownOpen, setIsTopItemsDropdownOpen] = useState(false);
   const [isSearchDropdownOpen, setIsSearchDropdownOpen] = useState(false);
+  const [fontSize, setFontSize] = useState(16); // Default font size in px
 
   const topItemsRef = useRef(null);
   const searchRef = useRef(null);
 
   const toggleTopItemsDropdown = () => {
     setIsTopItemsDropdownOpen(!isTopItemsDropdownOpen);
-    setIsSearchDropdownOpen(false); // Close the other dropdown when one is opened
+    setIsSearchDropdownOpen(false);
   };
 
   const toggleSearchDropdown = () => {
     setIsSearchDropdownOpen(!isSearchDropdownOpen);
-    setIsTopItemsDropdownOpen(false); // Close the other dropdown when one is opened
+    setIsTopItemsDropdownOpen(false);
   };
 
   const closeDropdowns = () => {
     setIsTopItemsDropdownOpen(false);
     setIsSearchDropdownOpen(false);
   };
+
+  const increaseFontSize = () => {
+    setFontSize((prevSize) => (prevSize < 24 ? prevSize + 2 : prevSize)); // Limit the maximum font size
+  };
+
+  const decreaseFontSize = () => {
+    setFontSize((prevSize) => (prevSize > 12 ? prevSize - 2 : prevSize)); // Limit the minimum font size
+  };
+
+  useEffect(() => {
+    document.documentElement.style.fontSize = `${fontSize}px`;
+  }, [fontSize]);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
@@ -47,22 +60,22 @@ const App = () => {
 
   return (
     <Router>
-      <div className="app">
-        <nav className="navbar">
-          <div className="navbar-left">
+      <main className="app">
+        <header className="navbar">
+          <nav className="navbar-left">
             <Link to="/" className="login-button">Login</Link>
-          </div>
-          <div className="navbar-center">
+          </nav>
+          <section className="navbar-center">
             <div className="dropdown" ref={topItemsRef}>
               <button onClick={toggleTopItemsDropdown} className="navbar-link">
                 Your Top Items
               </button>
               {isTopItemsDropdownOpen && (
-                <div className="dropdown-content show">
-                  <Link to="/top-songs" className="dropdown-item" onClick={closeDropdowns}>Top Songs</Link>
-                  <Link to="/top-artists" className="dropdown-item" onClick={closeDropdowns}>Top Artists</Link>
-                  <Link to="/top-albums" className="dropdown-item" onClick={closeDropdowns}>Top Albums</Link>
-                </div>
+                <ul className="dropdown-content show">
+                  <li><Link to="/top-songs" className="dropdown-item" onClick={closeDropdowns}>Top Songs</Link></li>
+                  <li><Link to="/top-artists" className="dropdown-item" onClick={closeDropdowns}>Top Artists</Link></li>
+                  <li><Link to="/top-albums" className="dropdown-item" onClick={closeDropdowns}>Top Albums</Link></li>
+                </ul>
               )}
             </div>
             <div className="dropdown" ref={searchRef}>
@@ -70,15 +83,19 @@ const App = () => {
                 Search
               </button>
               {isSearchDropdownOpen && (
-                <div className="dropdown-content show">
-                  <Link to="/search" className="dropdown-item" onClick={closeDropdowns}>Search Songs</Link>
-                  <Link to="/playlist-search" className="dropdown-item" onClick={closeDropdowns}>Search Playlists</Link>
-                  <Link to="/recommendations" className="dropdown-item" onClick={closeDropdowns}>Song Recommendations</Link>
-                </div>
+                <ul className="dropdown-content show">
+                  <li><Link to="/search" className="dropdown-item" onClick={closeDropdowns}>Search Songs</Link></li>
+                  <li><Link to="/playlist-search" className="dropdown-item" onClick={closeDropdowns}>Search Playlists</Link></li>
+                  <li><Link to="/recommendations" className="dropdown-item" onClick={closeDropdowns}>Song Recommendations</Link></li>
+                </ul>
               )}
             </div>
-          </div>
-        </nav>
+          </section>
+          <aside className="navbar-right">
+            <button onClick={decreaseFontSize} className="font-size-button">A-</button>
+            <button onClick={increaseFontSize} className="font-size-button">A+</button>
+          </aside>
+        </header>
 
         <Routes>
           <Route path="/" element={<Login />} />
@@ -90,7 +107,7 @@ const App = () => {
           <Route path="/playlist-search" element={<PlaylistSearch />} />
           <Route path="/recommendations" element={<Recommendations />} />
         </Routes>
-      </div>
+      </main>
     </Router>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { Helmet } from 'react-helmet'; // Import React Helmet
 import '../styles/App.css';
 
 const PlaylistSearch = () => {
@@ -34,7 +35,6 @@ const PlaylistSearch = () => {
       setResults(response.data.playlists.items);
     } catch (error) {
       console.error('Error searching for playlists:', error);
-
     }
   };
 
@@ -122,61 +122,70 @@ const PlaylistSearch = () => {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gray-900 text-white">
-      <div className="text-center my-8">
-        <h1 className="text-3xl font-bold mb-4">Search for Playlists</h1>
-        {!token ? (
-          <p className="text-red-500">Expired or no token. Please log in.</p>
-        ) : (
-          <div>
-          <input
-            type="text"
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyDown={handleKeyDown}
-            placeholder="Search for a playlist"
-            className="p-2 text-lg rounded-md border border-input text-gray-900" 
-          />
-          <button
-            onClick={handleSearch}
-            className="ml-2 px-4 py-2 bg-[#1DB954] text-white rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
-          >
-            Search
-          </button>
-          </div>
-        )}
-      </div>
-
-      {results.length > 0 && (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
-          {results.map((playlist) => (
-            <div className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between" key={playlist.id}>
-              <img src={playlist.images[0]?.url} alt={playlist.name} className="rounded-lg w-full h-auto mb-4" />
-              <h3 className="text-lg font-semibold mb-2">{playlist.name}</h3>
-              <p className="text-sm text-gray-400">
-                {stripHtmlTags(playlist.description) || 'No description available'}
-              </p>
-              <div className="mt-4 flex gap-2 justify-center">
-                <button
-                  onClick={() => handlePlayPause(playlist.id)}
-                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
-                >
-                  {playingPlaylistId === playlist.id ? 'Pause Preview' : 'Play Preview'}
-                </button>
-                <button
-                  onClick={() => followPlaylist(playlist.id)}
-                  className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
-                >
-                  Add to Library
-                </button>
-              </div>
+    <>
+      <Helmet>
+        <title>Search for Playlists</title>
+        <meta name="description" content="Search for playlists on Spotify, view playlist details, and listen to previews of tracks." />
+        <meta property="og:title" content="Search for Playlists" />
+        <meta property="og:description" content="Find and explore playlists from Spotify. Search for playlists, view their details, and listen to previews of tracks." />
+        <meta property="og:url" content="https://spotify-dashboard-jet.vercel.app/playlist-search" />
+      </Helmet>
+      <main className="flex flex-col min-h-screen bg-gray-900 text-white">
+        <header className="text-center my-8">
+          <h1 className="text-3xl font-bold mb-4">Search for Playlists</h1>
+          {!token ? (
+            <p className="text-red-500">Expired or no token. Please log in.</p>
+          ) : (
+            <div>
+              <input
+                type="text"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="Search for a playlist"
+                className="p-2 text-lg rounded-md border border-input text-gray-900"
+              />
+              <button
+                onClick={handleSearch}
+                className="ml-2 px-4 py-2 bg-[#1DB954] text-white rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+              >
+                Search
+              </button>
             </div>
-          ))}
-        </div>
-      )}
+          )}
+        </header>
 
-      <audio ref={audioRef} />
-    </div>
+        {results.length > 0 && (
+          <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 p-6">
+            {results.map((playlist) => (
+              <article key={playlist.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
+                <img src={playlist.images[0]?.url} alt={playlist.name} className="rounded-lg w-full h-auto mb-4" />
+                <h3 className="text-lg font-semibold mb-2">{playlist.name}</h3>
+                <p className="text-sm text-gray-400">
+                  {stripHtmlTags(playlist.description) || 'No description available'}
+                </p>
+                <div className="mt-4 flex gap-2 justify-center">
+                  <button
+                    onClick={() => handlePlayPause(playlist.id)}
+                    className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+                  >
+                    {playingPlaylistId === playlist.id ? 'Pause Preview' : 'Play Preview'}
+                  </button>
+                  <button
+                    onClick={() => followPlaylist(playlist.id)}
+                    className="bg-[#1DB954] text-white py-2 px-4 rounded-md font-bold transition-colors duration-300 hover:bg-green-400"
+                  >
+                    Add to Library
+                  </button>
+                </div>
+              </article>
+            ))}
+          </section>
+        )}
+
+        <audio ref={audioRef} />
+      </main>
+    </>
   );
 };
 
