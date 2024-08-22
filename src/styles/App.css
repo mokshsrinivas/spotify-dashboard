@@ -40,6 +40,7 @@ body {
 .navbar {
   @apply bg-[#1DB954] text-primary-foreground p-4 flex justify-between items-center;
   height: 64px;
+  position: relative;
 }
 
 .navbar-center {
@@ -48,17 +49,16 @@ body {
 
 .centered-button {
   @apply text-white font-bold no-underline transition-colors duration-300 hover:bg-green-400 rounded-md;
-  height: 64px; 
-  line-height: 64px;  
-  text-align: center;  
-  padding: 0 20px;  
+  height: 64px;
+  line-height: 64px;
+  text-align: center;
+  padding: 0 20px;
   cursor: pointer;
 }
 
 .login-button {
   @apply bg-[#1DB954];
-  @apply centered-button;  
-  
+  @apply centered-button;
 }
 
 .dropdown {
@@ -72,8 +72,8 @@ body {
 .dropdown-content {
   @apply absolute bg-white text-[#1DB954] rounded-lg shadow-lg hidden;
   min-width: 230px;
-  max-width: 100vw; 
-  max-height: 200px; 
+  max-width: 100vw;
+  max-height: 200px;
   overflow-y: auto;
   z-index: 10;
 }
@@ -95,7 +95,6 @@ body {
   right: 0; /* Position dropdown to the left of the button */
 }
 
-
 .dropdown-content.right {
   right: 0; /* Position dropdown to the right of the button */
 }
@@ -108,32 +107,39 @@ ul {
   @apply list-none p-0 m-0;
 }
 
-.search, .playlist-search {
+.search,
+.playlist-search {
   @apply text-center my-5;
 }
 
-.search input, .playlist-search input {
+.search input,
+.playlist-search input {
   @apply p-2 text-lg rounded-md border border-input;
 }
 
-.search button, .playlist-search button {
+.search button,
+.playlist-search button {
   @apply px-6 py-3 ml-4 bg-[#1DB954] text-primary-foreground border-none rounded-md cursor-pointer transition-colors duration-300;
   @apply mt-4;
 }
 
-.search button:hover, .playlist-search button:hover {
+.search button:hover,
+.playlist-search button:hover {
   @apply bg-green-400;
 }
 
-.search ul, .playlist-search ul {
+.search ul,
+.playlist-search ul {
   @apply grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 p-5;
 }
 
-.search li, .playlist-search li {
+.search li,
+.playlist-search li {
   @apply flex items-center bg-card p-4 rounded-md;
 }
 
-.search img, .playlist-search img {
+.search img,
+.playlist-search img {
   @apply rounded-md mr-3;
 }
 
@@ -181,43 +187,33 @@ ul {
 
 
 
-@media (min-width: 640px) {
-  .search button, .playlist-search button {
-    @apply mt-5;
+@media (max-width: 640px) {
+  .navbar {
+    @apply flex flex-col items-stretch w-full;
+    height: auto; 
+    padding: 0; 
+  }
+
+  .navbar-center,
+  .navbar-left,
+  .navbar-right {
+    @apply w-full; 
+  }
+
+  .navbar-link,
+  .login-button,
+  .font-size-button {
+    @apply w-full text-center p-4;
+    height: auto; 
+    line-height: normal; 
+  }
+
+  .dropdown button,
+  .navbar-link {
+    @apply w-full text-center p-4;
   }
 
   .dropdown-content {
-    @apply absolute bg-white text-[#1DB954] rounded-lg shadow-lg hidden;
-    min-width: 200px;
-    max-width: 100vw; 
-    max-height: 200px; 
-    overflow-y: auto;
-    z-index: 10;
+    @apply right-0 left-auto;
   }
-}
-
-
-
-@media (max-width: 640px) {
-.navbar {
-  background-color: #1DB954;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  position: relative;
-  width: 100%;
-  top: 0;
-  z-index: 100;
-}
-
-
-.dropdown {
-  @apply right-0;
-}
-
-
-
-
-
-  
 }
