@@ -116,6 +116,8 @@ const Search = () => {
           ) : (
             <div>
               <input
+                id="searchQuery" 
+                name="searchQuery"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

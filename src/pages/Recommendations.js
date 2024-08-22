@@ -182,6 +182,8 @@ const Recommendations = () => {
           ) : (
             <div className="relative">
               <input
+                id="RecQuery" 
+                name="RecQuery"
                 type="text"
                 value={query}
                 onChange={(e) => {

@@ -138,6 +138,8 @@ const PlaylistSearch = () => {
           ) : (
             <div>
               <input
+                id="PlaylistQuery" 
+                name="PlaylistQuery"
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
