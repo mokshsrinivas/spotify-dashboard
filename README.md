@@ -4,9 +4,11 @@ Hi, this is my Final Project for CS396 which utilizes a Spotify API.
 
 Here is the website: https://spotify-dashboard-jet.vercel.app
 
-This shouldn't need to run locally because you can just run the site on the link above but if you need to run it locally, in login.js, change redirect uri to http://localhost:3000/callback. run the command npm install react react-dom react-scripts helmet
+Here is the link to the video: https://drive.google.com/file/d/1P2c-EzF3fqABPV6NiXNGigwiGgY1d7rU/view?usp=sharing
 
-## Available Featers
+This shouldn't need to run locally because you can just run the site on the link above but if you need to run it locally, in src/pages/login.js, change redirect uri to http://localhost:3000/callback. In the terminal of the root directory (should be ending in spotify-dashboard), run "npm start" and you can access the site on: http://localhost:3000/
+
+## Available Features
 
 In this website you will find
 
