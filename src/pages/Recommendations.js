@@ -49,7 +49,6 @@ const Recommendations = () => {
       }));
     } catch (error) {
       console.error('Error searching for tracks:', error);
-      alert("Invalid token. Log in first");
     }
   }, [query, token]);
 
