@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Helmet } from 'react-helmet'; // Import React Helmet
+import { Helmet } from 'react-helmet'; 
 import '../styles/App.css';
 
 const TopArtists = () => {
@@ -52,7 +52,7 @@ const TopArtists = () => {
       });
       const tracks = response.data.tracks;
       if (tracks.length > 0) {
-        return tracks[0].preview_url; // Get the preview URL of the top track
+        return tracks[0].preview_url; 
       }
     } catch (error) {
       console.error('Error fetching preview for artist:', error);
@@ -62,13 +62,11 @@ const TopArtists = () => {
 
   const handlePlayPause = async (artistId) => {
     if (playingArtistId === artistId) {
-      // Pause if the same artist is clicked
       if (audioRef.current) {
         audioRef.current.pause();
         setPlayingArtistId(null);
       }
     } else {
-      // Stop the previous track and play the new one
       if (audioRef.current) {
         audioRef.current.pause();
       }
@@ -103,7 +101,7 @@ const TopArtists = () => {
                     <img src={artist.images[0]?.url} alt={artist.name} className="rounded-lg w-full h-auto mb-4" />
                     <figcaption>
                       <h2 className="text-lg font-semibold mb-2">
-                        {index + 1}. {artist.name} {/* Display the rank number here */}
+                        {index + 1}. {artist.name} 
                       </h2>
                     </figcaption>
                   </figure>

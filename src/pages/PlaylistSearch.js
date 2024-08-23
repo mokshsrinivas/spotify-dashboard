@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
-import { Helmet } from 'react-helmet'; // Import React Helmet
+import { Helmet } from 'react-helmet';
 import '../styles/App.css';
 
 const PlaylistSearch = () => {
@@ -94,7 +94,7 @@ const PlaylistSearch = () => {
     try {
       await axios.put(
         `https://api.spotify.com/v1/playlists/${playlistId}/followers`,
-        {}, // Empty body
+        {}, 
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -114,7 +114,6 @@ const PlaylistSearch = () => {
     }
   };
 
-  // Function to strip HTML tags from the description
   const stripHtmlTags = (htmlString) => {
     const div = document.createElement('div');
     div.innerHTML = htmlString;

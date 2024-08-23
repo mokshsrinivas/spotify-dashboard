@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Helmet } from 'react-helmet'; // Import React Helmet
+import { Helmet } from 'react-helmet'; 
 import '../styles/App.css';
 
 const TopAlbums = () => {
@@ -8,7 +8,7 @@ const TopAlbums = () => {
   const [topSongs, setTopSongs] = useState([]);
   const [albumsWithScores, setAlbumsWithScores] = useState([]);
   const [playingAlbumId, setPlayingAlbumId] = useState(null);
-  const [loading, setLoading] = useState(true); // Add loading state
+  const [loading, setLoading] = useState(true); 
   const audioRef = useRef(null);
 
   useEffect(() => {
@@ -36,7 +36,7 @@ const TopAlbums = () => {
       if (!token) return;
 
       let allTopSongs = [];
-      let next = 'https://api.spotify.com/v1/me/top/tracks?limit=50'; // Start with the first page
+      let next = 'https://api.spotify.com/v1/me/top/tracks?limit=50'; 
 
       while (next && allTopSongs.length < 100) {
         try {
@@ -48,14 +48,14 @@ const TopAlbums = () => {
 
           allTopSongs = [...allTopSongs, ...response.data.items];
 
-          next = response.data.next; // Update the URL for the next page
+          next = response.data.next; 
         } catch (error) {
           console.error('Error fetching top songs:', error);
           break;
         }
       }
 
-      setTopSongs(allTopSongs.slice(0, 100)); // Ensure we only keep the top 100 songs
+      setTopSongs(allTopSongs.slice(0, 100)); 
     };
 
     fetchTopSongs();
@@ -64,11 +64,10 @@ const TopAlbums = () => {
   useEffect(() => {
     const fetchAlbums = async () => {
       if (token && topSongs.length > 0) {
-        setLoading(true); // Set loading to true before fetching
+        setLoading(true); 
 
         const albumScores = new Map();
 
-        // Fetch albums for each top song
         for (const song of topSongs) {
           try {
             const response = await axios.get(`https://api.spotify.com/v1/tracks/${song.id}`, {
@@ -92,7 +91,7 @@ const TopAlbums = () => {
             const currentScore = albumScores.get(albumId).score;
             albumScores.set(albumId, {
               album: album,
-              score: currentScore + (100 - rank) // Higher rank contributes more to the score
+              score: currentScore + (100 - rank) 
             });
           } catch (error) {
             console.error('Error fetching album for song:', error);
@@ -101,10 +100,10 @@ const TopAlbums = () => {
 
         const sortedAlbums = Array.from(albumScores.values())
           .sort((a, b) => b.score - a.score)
-          .slice(0, 20); // Limit to top 20 albums
+          .slice(0, 20); 
 
         setAlbumsWithScores(sortedAlbums);
-        setLoading(false); // Set loading to false after fetching
+        setLoading(false); 
       }
     };
 
@@ -120,7 +119,7 @@ const TopAlbums = () => {
       });
       const tracks = response.data.items;
       if (tracks.length > 0) {
-        return tracks[0].preview_url; // Get the preview URL of the first track
+        return tracks[0].preview_url;
       }
     } catch (error) {
       console.error('Error fetching preview for album:', error);
@@ -130,13 +129,11 @@ const TopAlbums = () => {
 
   const handlePlayPause = async (albumId) => {
     if (playingAlbumId === albumId) {
-      // Pause if the same album is clicked
       if (audioRef.current) {
         audioRef.current.pause();
         setPlayingAlbumId(null);
       }
     } else {
-      // Stop the previous track and play the new one
       if (audioRef.current) {
         audioRef.current.pause();
       }
@@ -173,7 +170,7 @@ const TopAlbums = () => {
                     <article key={album.id} className="bg-gray-800 rounded-lg p-4 text-center flex flex-col justify-between">
                       <img src={album.images[0]?.url} alt={album.name} className="rounded-lg w-full h-auto mb-4" />
                       <h3 className="text-lg font-semibold mb-2">
-                        {index + 1}. {album.name} {/* Display the rank number here */}
+                        {index + 1}. {album.name} 
                       </h3>
                       <p className="text-sm text-gray-400">{album.artists.map(artist => artist.name).join(', ')}</p>
                       <button

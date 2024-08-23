@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect, useCallback } from 'react';
 import axios from 'axios';
-import { Helmet } from 'react-helmet'; // Import React Helmet
+import { Helmet } from 'react-helmet'; 
 import '../styles/App.css';
 
 const Recommendations = () => {

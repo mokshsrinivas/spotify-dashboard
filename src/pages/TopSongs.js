@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
-import { Helmet } from 'react-helmet'; // Import React Helmet
+import { Helmet } from 'react-helmet'; 
 import '../styles/App.css';
 
 const TopSongs = () => {
@@ -41,7 +41,6 @@ const TopSongs = () => {
         setTopTracks(response.data.items);
         const trackIds = response.data.items.map(track => track.id).join(',');
 
-        // Fetch audio features for the top tracks
         axios.get(`https://api.spotify.com/v1/audio-features?ids=${trackIds}`, {
           headers: {
             Authorization: `Bearer ${token}`
@@ -101,13 +100,12 @@ const TopSongs = () => {
                       <img src={track.album.images[0]?.url} alt={track.name} className="rounded-lg w-full h-auto mb-4" />
                       <figcaption>
                         <h2 className="text-lg font-semibold mb-2">
-                          {index + 1}. {track.name} {/* Display the rank number here */}
+                          {index + 1}. {track.name}
                         </h2>
                         <p className="text-sm text-gray-400 mb-4">{track.artists.map(artist => artist.name).join(', ')}</p>
                       </figcaption>
                     </figure>
 
-                    {/* Add metrics (acousticness, danceability, etc.) */}
                     {trackFeatures[track.id] && (
                       <section className="space-y-2 mb-4">
                         {['acousticness', 'danceability', 'energy', 'instrumentalness', 'valence'].map(metric => {
@@ -129,10 +127,10 @@ const TopSongs = () => {
                                     style={{
                                       left:
                                         barWidth < 10
-                                          ? 'calc(100% + 5px)' // Place outside if too small
+                                          ? 'calc(100% + 5px)'
                                           : barWidth < 25
-                                          ? `${barWidth + 3}%` // Slightly offset for small bars
-                                          : `${barWidth - 10}%`, // Center for larger bars
+                                          ? `${barWidth + 3}%` 
+                                          : `${barWidth - 10}%`, 
                                     }}
                                   >
                                     {metricValue.toFixed(0)}%
