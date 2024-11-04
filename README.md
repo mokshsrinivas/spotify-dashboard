@@ -1,12 +1,11 @@
 # The Spotify Dashboard
-
-Hi, this is my Final Project for CS396 which utilizes a Spotify API.
+Name: Moksh Srinivas
 
 Here is the website: https://spotify-dashboard-jet.vercel.app
 
 Here is the link to the video: https://drive.google.com/file/d/1P2c-EzF3fqABPV6NiXNGigwiGgY1d7rU/view?usp=sharing
 
-This shouldn't need to run locally because you can just run the site on the link above but if you need to run it locally, in src/pages/login.js, change redirect uri to http://localhost:3000/callback. In the terminal of the root directory (should be ending in spotify-dashboard), run "npm start" and you can access the site on: http://localhost:3000/
+This shouldn't need to run locally because you can just run the site on the link above but if you need to run it locally, in src/pages/login.js, change redirect uri to http://localhost:3000/callback. In the terminal of the root directory (should be ending in spotify-dashboard). Run "npm start" and if there is an error (specifically if react-scripts is not recognized), run "npm install react react-scripts axios helmet" to ensure all the requirements to run the site is met and you can access the site on: http://localhost:3000/
 
 ## Available Features
 
